@@ -31,7 +31,7 @@ function calculateAverageDramaRate(anArr) {
         return value.genre.includes('Drama')
     }); if (newArray.length === 0) {
       return 0
-    } else {    
+    } else {
     return calculateAverageMovieRate(newArray)
 }
 }
@@ -69,8 +69,50 @@ function countSpielbergDramaMovies (anArr) {
 
 // Iteration 5: Alphabetic Order - Order by title and print the first 20 titles
 
+ 
+function orderAlphabetically(arr) {
+    let sorted20s = [...arr]
+    let finalList = []
+    sorted20s = sorted20s.sort((a,b) =>{
+        if (a.title > b.title) {
+          return 1;
+        } else if (a.title < b.title) {
+          return -1;
+        }
+    })
+        sorted20s = sorted20s.slice(0,20)
+    for (let key in sorted20s) {
+     // console.log(sorted20s[key].title)
+        finalList.push(sorted20s[key].title)
+    }
+    return finalList
+}
+
 
 
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
+
+function turnHoursToMinutes(arr) { 
+    let cloneArr = [...arr]
+    let turnHours = cloneArr.map((value, index) => {
+  if (cloneArr[index].duration.includes('h') && cloneArr[index].duration.includes('m')) {
+    let currentStringMin = cloneArr[index].duration.substring(cloneArr[index].duration.indexOf(' '),  cloneArr[index].duration.indexOf('m'))
+    let currentStringHour = cloneArr[index].duration.substring(0,  cloneArr[index].duration.indexOf('h'))
+         currentStringHour = parseInt(currentStringHour)
+         currentStringMin = parseInt(currentStringMin)
+    let durationValue = (currentStringHour * 60) + currentStringMin
+    cloneArr[index].duration = durationValue
+  } else if (cloneArr[index].duration.includes('h')) {
+    currentStringHour = cloneArr[index].duration.substring(0,  cloneArr[index].duration.indexOf('h'))
+    currentStringHour = parseInt(currentStringHour)
+    durationValue = (currentStringHour * 60)
+    cloneArr[index].duration = durationValue
+  } else {
+  cloneArr[index].duration = parseInt(cloneArr[index].duration)
+}
+}
+)
+return cloneArr
+}
 
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
